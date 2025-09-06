@@ -29,7 +29,7 @@ const (
 	COMPLEX PromptName = "complex_prompt"
 )
 
-func NewStdioMCPServer() *server.MCPServer {
+func NewComplexMCPServer() *server.MCPServer {
 
 	hooks := &server.Hooks{}
 
@@ -61,7 +61,7 @@ func NewStdioMCPServer() *server.MCPServer {
 	})
 
 	mcpServer := server.NewMCPServer(
-		"example-servers/everything",
+		"mcp-server-demo",
 		"1.0.0",
 		server.WithResourceCapabilities(true, true),
 		server.WithPromptCapabilities(true),

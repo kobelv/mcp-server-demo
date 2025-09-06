@@ -11,8 +11,8 @@ import (
 
 func main() {
 	var transport string
-	flag.StringVar(&transport, "t", "stdio", "Transport type (stdio or http)")
-	flag.StringVar(&transport, "transport", "stdio", "Transport type (stdio or http)")
+	flag.StringVar(&transport, "t", "http", "Transport type (stdio or http)")
+	flag.StringVar(&transport, "transport", "http", "Transport type (stdio or http)")
 	flag.Parse()
 
 	// Only check for "http" since stdio is the default
@@ -24,8 +24,9 @@ func main() {
 			panic(any(err))
 		}
 	} else {
-		if err := server.ServeStdio(adapter.NewStdioMCPServer()); err != nil {
-			log.Fatalf("Server error: %v", err)
+		log.Printf("Stdio server is starting")
+		if err := server.ServeStdio(adapter.NewMCPServer()); err != nil {
+			log.Fatalf("Stdio MCP Server error: %v", err)
 			panic(any(err))
 		}
 	}

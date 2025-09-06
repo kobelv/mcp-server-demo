@@ -8,16 +8,11 @@ import (
 
 	"github.com/google/wire"
 
-	"mcp-server-demo/application/appservice"
-	"mcp-server-demo/application/dto"
-	"mcp-server-demo/infrastructure/adapter"
 	"mcp-server-demo/infrastructure/common/cache"
 	"mcp-server-demo/infrastructure/common/db"
 	"mcp-server-demo/infrastructure/common/logit"
 	"mcp-server-demo/infrastructure/common/request"
 	"mcp-server-demo/infrastructure/common/response"
-	"mcp-server-demo/infrastructure/po"
-	"mcp-server-demo/infrastructure/repository"
 	"mcp-server-demo/interfaces/http"
 	"mcp-server-demo/interfaces/http/controller"
 )
@@ -33,19 +28,9 @@ func NewApp(ctx context.Context) (*app, error) {
 		response.NewHTTPResponseWriter,
 		request.NewRequest,
 
-		appservice.NewOrderAS,
-
-		dto.NewOrderConv,
-
-		controller.NewOrder,
 		controller.NewHealth,
 		http.NewHTTPHandler,
 		newHTTPServer,
-
-		po.NewOrderPOConv,
-
-		adapter.NewUserAdapter,
-		repository.NewOrderRepository,
 
 		wire.Struct(new(app), "*"),
 	)))
